@@ -51,7 +51,7 @@ func dump_elf(filename string) int {
 
 func init_debug(filename string) int {
 	attr := &os.ProcAttr{ Sys: &syscall.SysProcAttr{ Ptrace: true } }
-	if proc, err := os.StartProcess("/bin/ls", []string { "/tmp" }, attr); err == nil {
+	if proc, err := os.StartProcess(filename, []string { "/" }, attr); err == nil {
 		proc.Wait()
 		foo := syscall.PtraceAttach(proc.Pid)
 		fmt.Printf("Started New Process: %v.\n", proc.Pid)
